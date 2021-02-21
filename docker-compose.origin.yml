@@ -1,0 +1,33 @@
+version: "2"
+volumes:
+  exiles:
+    driver: 'local'
+  exiles-wine:
+    driver: 'local'
+services:
+  conan:
+    build: '.'
+    image: 'conan:latest'
+    container_name: 'conan'
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '1m'
+        max-file: '1'
+    ports:
+      - 7777:7777/udp
+      - 7778:7778/udp
+      - 27015:27015/udp
+      - 25575:25575/tcp
+    volumes:
+      - 'exiles:/conan/server/ConanSandbox/Saved'
+      - 'exiles-wine:/home/conan'
+    environment:
+      - SERVER_NAME=サーバー名
+      - ADMIN_PASSWORD=パスワード
+      - RCON_PASSWORD=パスワード
+      - SERVER_MESSAGE=サーバー参加時に表示されるメッセージ
+    mem_limit: 8g
+    command: bash -c '/entrypoint.sh && /start.sh && /bin/bash'
+    restart: 'unless-stopped'
+    tty: true

@@ -1,0 +1,9 @@
+docker-compose.yml
+Saved/*.bat
+Saved/*.db
+Saved/*.db-shm
+Saved/*.db-wal
+Saved/*.exe
+Saved/Readme.txt
+Saved/serveruid.txt
+Saved/Logs
